@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiPong", "MauiPong\MauiPong.csproj", "{02802067-7708-43F4-B5A1-D7503C0B8515}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModels", "DataModels\DataModels.csproj", "{290586B1-1164-49FA-A350-C9B341784614}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02802067-7708-43F4-B5A1-D7503C0B8515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02802067-7708-43F4-B5A1-D7503C0B8515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02802067-7708-43F4-B5A1-D7503C0B8515}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{02802067-7708-43F4-B5A1-D7503C0B8515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02802067-7708-43F4-B5A1-D7503C0B8515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02802067-7708-43F4-B5A1-D7503C0B8515}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{290586B1-1164-49FA-A350-C9B341784614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290586B1-1164-49FA-A350-C9B341784614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290586B1-1164-49FA-A350-C9B341784614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290586B1-1164-49FA-A350-C9B341784614}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {593855E8-C075-4807-9189-A7B75EEA9E35}
+	EndGlobalSection
+EndGlobal
