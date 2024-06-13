@@ -1,3 +1,15 @@
-﻿<div class="my-component">
+﻿@using DataModels
+@inject IDispatcher Dispatcher
+
+
+<div class="my-component">
     This component is defined in the <strong>PongClassLibrary</strong> library.
 </div>
+
+@code{
+
+    [Parameter]
+   
+    public required PongGameState GameState { get; set; }
+
+}
