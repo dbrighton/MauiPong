@@ -7,7 +7,7 @@ public class MainFeatureState : Feature<MainState>
 
     protected override MainState GetInitialState()
     {
-        return new MainState();
+        return new MainState(new PongGameState());
     }
 }
 

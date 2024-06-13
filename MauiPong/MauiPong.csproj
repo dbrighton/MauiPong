@@ -69,6 +69,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DataModels\DataModels.csproj" />
+      <ProjectReference Include="..\PongClassLibrary\PongClassLibrary.csproj" />
     </ItemGroup>
 
 </Project>
