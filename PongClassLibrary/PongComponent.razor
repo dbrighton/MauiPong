@@ -1,15 +1,20 @@
-﻿@using DataModels
+﻿@using Common
 @inject IDispatcher Dispatcher
 
 
-<div class="my-component">
-    This component is defined in the <strong>PongClassLibrary</strong> library.
+<div class="pong-game">
+    <img alt="pong game" src="@GameState.GameSvg"/>
 </div>
 
 @code{
 
     [Parameter]
-   
     public required PongGameState GameState { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine(GameState);
+        base.OnInitialized();
+    }
 
 }

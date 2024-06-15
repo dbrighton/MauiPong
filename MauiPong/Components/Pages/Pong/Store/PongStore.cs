@@ -1,10 +1,11 @@
 ﻿
+using Common;
+
 namespace MauiPong.Components.Pages.Pong.Store;
 
 public record PongState
 {
     public PongGameState PongGameState { get; set; } = new();
-
 }
 
 public class PongGameFeature : Feature<PongState>

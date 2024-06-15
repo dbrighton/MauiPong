@@ -61,6 +61,8 @@
         <PackageReference Include="Fluxor" Version="6.0.0" />
         <PackageReference Include="Fluxor.Blazor.Web" Version="6.0.0" />
         <PackageReference Include="Fluxor.Blazor.Web.ReduxDevTools" Version="6.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.6" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="8.0.6" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
@@ -68,7 +70,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DataModels\DataModels.csproj" />
+      <ProjectReference Include="..\DataModels\Common.csproj" />
       <ProjectReference Include="..\PongClassLibrary\PongClassLibrary.csproj" />
     </ItemGroup>
 

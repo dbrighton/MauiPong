@@ -1,9 +1,12 @@
 ﻿@page "/pong"
-@inject IState<PongState> _PongState
+
+
+@* @inject IState<GameState> PongState *@
 
 <h3>Pong</h3>
 
-<PongComponent GameState="_PongState.Value.GameState"></PongComponent>
+@* <PongComponent GameState="PongState.Value.GameState"></PongComponent> *@
+
 
 @code {
 

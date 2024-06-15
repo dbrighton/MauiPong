@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiPong", "MauiPong\MauiPo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PongClassLibrary", "PongClassLibrary\PongClassLibrary.csproj", "{AED3E302-B5A9-41B8-A324-C21B5F19B2A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModels", "DataModels\DataModels.csproj", "{E7F7F1F9-7B6B-4A2A-9333-38B3ACEB088F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "DataModels\Common.csproj", "{E7F7F1F9-7B6B-4A2A-9333-38B3ACEB088F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pong.API", "Pong.API\Pong.API.csproj", "{46761190-083F-406C-8176-E79EDA9E60FA}"
 EndProject
