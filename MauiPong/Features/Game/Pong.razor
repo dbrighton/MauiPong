@@ -1,0 +1,233 @@
+﻿@page "/pong"
+
+@using Common
+@using Fluxor
+@using global::Pong.Features.Game.Store
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+@implements IDisposable
+@inject IJSRuntime JSRuntime;
+@inject IState<PongStore.PongGameState> PongState
+@inject IDispatcher Dispatcher
+
+
+<div class="control-instructions">
+    <div>Use a-z to move right paddle</div>
+    <div>Use 'Up and Down' to move the left paddle</div>
+</div>
+
+<div tabindex="0" @ref="pongGameContainer" @onkeydown="OnKeyDown" @onblur="OnBlur" style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; outline: none;">
+    <svg id="pongGameSvg" style="width: 90%; height: 90%;" viewBox="0 0 400 200">
+        <rect width="100%" height="100%" fill="black" />
+        <rect x="10" y="@PongState.Value.LeftPaddleY" width="@PongState.Value.PaddleWidth" height="@PongState.Value.PaddleHeight" fill="white" />
+        <rect x="380" y="@PongState.Value.RightPaddleY" width="@PongState.Value.PaddleWidth" height="@PongState.Value.PaddleHeight" fill="white" />
+        <circle cx="@PongState.Value.BallX" cy="@PongState.Value.BallY" r="5" fill="white" />
+        <line x1="200" y1="0" x2="200" y2="200" stroke="white" stroke-dasharray="5,5" />
+        <!-- Labels for Player 1 and Player 2 at the top of the screen -->
+        <text x="50" y="15" fill="white" font-size="16" text-anchor="middle">Player One: @PongState.Value.Player1Score</text>
+        <text x="340" y="15" fill="white" font-size="16" text-anchor="middle">Player Two: @PongState.Value.Player2Score</text>
+    </svg>
+    @if (PongState.Value.IsGameEnded)
+    {
+        <button class="btn btn-primary" @onclick="StartNewGame">Start New Game</button>
+    }
+</div>
+<div>If paddles do not move. Click on the game and that will give it focus and should work... </div>
+@code {
+    private ElementReference pongGameContainer;
+    private Timer? _timer;
+    private object _updateLock = new object();
+
+    protected override Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitializedAsync");
+
+        StartGame();
+        return base.OnInitializedAsync();
+    }
+
+    private void StartGame()
+    {
+        Console.WriteLine("StartGame");
+
+        JSRuntime.InvokeVoidAsync("eval", "document.getElementById('pongGameContainer').focus()");
+        _timer = new Timer(async _ =>
+        {
+            await UpdateBallPosition();
+            //  await InvokeAsync(StateHasChanged);
+        }, null, 0, PongState.Value.GameSeed);
+
+        Dispatcher.Dispatch(new IsGamePausedAction(false));
+        Dispatcher.Dispatch(new IsGameEndedAction(false));
+        Dispatcher.Dispatch(new SetPlayer1ScoreAction(0));
+        Dispatcher.Dispatch(new SetPlayer2ScoreAction(0));
+    }
+
+    private async Task UpdateBallPosition()
+    {
+        await Task.Run(() =>
+        {
+            lock (_updateLock) // Locking the method
+            {
+                Console.WriteLine("UpdateBallPosition");
+
+                if (!PongState.Value.IsGamePaused)
+                {
+                    // Move the ball
+                    double newBallX = PongState.Value.BallX + PongState.Value.BallSpeed * PongState.Value.BallDirectionX;
+                    double newBallY = PongState.Value.BallY + PongState.Value.BallSpeed * PongState.Value.BallDirectionY;
+
+
+                    if (newBallX != PongState.Value.BallX || newBallY != PongState.Value.BallY)
+                    {
+                        // Dispatch action to update ball position in the state
+                        Dispatcher.Dispatch(new SetBallPositionAction(newBallX, newBallY));
+
+                        // Check for collisions with top and bottom walls
+                        if (PongState.Value.BallY <= 0 || PongState.Value.BallY >= 200)
+                        {
+                            Dispatcher.Dispatch(new SetBallDirectionYAction(PongState.Value.BallDirectionY * -1));
+                        }
+
+                        // Check for collisions with paddles
+                        if ((PongState.Value.BallX <= 20 && PongState.Value.BallY >= PongState.Value.LeftPaddleY && PongState.Value.BallY <= PongState.Value.LeftPaddleY + PongState.Value.PaddleHeight) ||
+                            (PongState.Value.BallX >= 380 && PongState.Value.BallY >= PongState.Value.RightPaddleY && PongState.Value.BallY <= PongState.Value.RightPaddleY + PongState.Value.PaddleHeight))
+                        {
+                            // Reverse X direction
+                            Dispatcher.Dispatch(new SetBallDirectionXAction(PongState.Value.BallDirectionX * -1));
+                            // Calculate new Y direction based on collision point
+                            double relativeIntersectY = (PongState.Value.BallY > 100 ? PongState.Value.RightPaddleY : PongState.Value.LeftPaddleY) + (PongState.Value.PaddleHeight / 2) - PongState.Value.BallY;
+                            double normalizedRelativeIntersectionY = (relativeIntersectY / (PongState.Value.PaddleHeight / 2));
+                            // Limit the angle to 45 degrees
+                            normalizedRelativeIntersectionY = Math.Clamp(normalizedRelativeIntersectionY, -1.0, 1.0);
+                            double maxAngle = Math.PI / 4; // 45 degrees
+                            double newDirectionY = Math.Tan(maxAngle * normalizedRelativeIntersectionY);
+                            Dispatcher.Dispatch(new SetBallDirectionYAction(newDirectionY));
+                        }
+
+
+                        // Check for ball passing paddles
+                        if (PongState.Value.BallX <= 0 || PongState.Value.BallX >= 400)
+                        {
+                            if (PongState.Value.BallX <= 0)
+                            {
+                                Dispatcher.Dispatch(new SetPlayer2ScoreAction(PongState.Value.Player2Score + 1));
+                                Dispatcher.Dispatch(new LastPlayerScoredOnAction(1)); // Player 1 was scored on
+                            }
+                            else
+                            {
+                                Dispatcher.Dispatch(new SetPlayer1ScoreAction(PongState.Value.Player1Score + 1));
+                                Dispatcher.Dispatch(new LastPlayerScoredOnAction(2)); // Player 2 was scored on
+                            }
+
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private async Task StopGameAsync()
+    {
+        Console.WriteLine("StopGameAsync");
+
+        _timer?.Change(Timeout.Infinite, Timeout.Infinite); // Stop the timer
+        Dispatcher.Dispatch(new IsGamePausedAction(true));
+
+        if (PongState.Value.Player1Score >= 10 || PongState.Value.Player2Score >= 10)
+        {
+            // End the game if a player scores 10 points
+            Dispatcher.Dispatch(new IsGameEndedAction(true));
+        }
+        else
+        {
+            // Pause for 3 seconds and then serve the ball
+            await Task.Delay(3000); // Pause for 3 seconds
+            ServeNextBall();
+            Dispatcher.Dispatch(new IsGamePausedAction(false));
+            _timer?.Change(0, PongState.Value.GameSeed); // Restart the timer
+        }
+    }
+
+    private void ServeNextBall()
+    {
+        Console.WriteLine("ServeNextBall");
+        Dispatcher.Dispatch(new IsGamePausedAction(false));
+
+        if (!PongState.Value.IsGamePaused && !PongState.Value.IsGameEnded)
+        {
+            Dispatcher.Dispatch(new SetBallPositionAction(200, 100));
+            Dispatcher.Dispatch(new SetBallDirectionXAction((PongState.Value.LastPlayerScoredOn == 1) ? -1 : 1));
+            Dispatcher.Dispatch(new SetBallDirectionYAction(0)); // Serve straight every time
+        }
+    }
+
+    private void OnKeyDown(KeyboardEventArgs e)
+    {
+        if ((DateTime.Now - PongState.Value.LastUpdate).TotalMilliseconds < PongState.Value.MovementInterval)
+        {
+            return; // Skip the update if the interval hasn't passed
+        }
+
+        Dispatcher.Dispatch(new SetLastUpdateAction(DateTime.Now)); // Update the last update time
+
+        double leftPaddleY = PongState.Value.LeftPaddleY;
+        double rightPaddleY = PongState.Value.RightPaddleY;
+
+        switch (e.Key)
+        {
+            case "a": // Move left paddle up
+                leftPaddleY = Math.Max(PongState.Value.LeftPaddleY - PongState.Value.PaddleSpeed, 0);
+                break;
+            case "z": // Move left paddle down
+                leftPaddleY = Math.Min(leftPaddleY + PongState.Value.PaddleSpeed, 200 - PongState.Value.PaddleHeight);
+                break;
+            case "ArrowUp": // Move right paddle up
+                rightPaddleY = Math.Max(rightPaddleY - PongState.Value.PaddleSpeed, 0);
+                break;
+            case "ArrowDown": // Move right paddle down
+                rightPaddleY = Math.Min(rightPaddleY + PongState.Value.PaddleSpeed, 200 - PongState.Value.PaddleHeight);
+                break;
+        }
+
+        Dispatcher.Dispatch(new MoveLeftPaddleYAction(leftPaddleY));
+        Dispatcher.Dispatch(new MoveRightPaddleYAction(rightPaddleY));
+
+        // Trigger a re-render to update the SVG with the new paddle positions
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void StartNewGame()
+    {
+        Console.WriteLine("StartNewGame");
+
+        Dispatcher.Dispatch(new SetPlayer1ScoreAction(0));
+        Dispatcher.Dispatch(new SetPlayer2ScoreAction(0));
+        Dispatcher.Dispatch(new SetBallPositionAction(200, 100));
+
+        Dispatcher.Dispatch(new IsGameEndedAction(false));
+        Dispatcher.Dispatch(new IsGamePausedAction(false));
+        StartGame();
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            pongGameContainer.FocusAsync();
+        }
+    }
+
+    private async Task OnBlur()
+    {
+        _timer?.Change(Timeout.Infinite, Timeout.Infinite); // Pause the timer
+        await Task.Run(() => Dispatcher.Dispatch(new IsGamePausedAction(true)));
+    }
+}

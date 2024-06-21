@@ -1,4 +1,4 @@
-﻿namespace MauiPong
+﻿namespace Pong
 {
     public partial class App : Application
     {

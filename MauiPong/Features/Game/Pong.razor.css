@@ -1,0 +1,18 @@
+
+img {
+    height:600px;
+    width:800px;
+}
+
+.control-instructions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.control-instructions > div {
+    flex: 1;
+}
+

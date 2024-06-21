@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace MauiPong
+namespace Pong
 {
     [Application]
     public class MainApplication : MauiApplication

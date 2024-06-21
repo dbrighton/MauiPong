@@ -1,9 +1,4 @@
-﻿using Fluxor.Blazor.Web.ReduxDevTools;
-using Microsoft.Extensions.Configuration;
-using System.Reflection;
-using MauiPong.Components.Pages.Pong.Store;
-
-namespace MauiPong
+﻿namespace Pong
 {
     public static class MauiProgram
     {
@@ -17,30 +12,13 @@ namespace MauiPong
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-
-            // Load the appsettings.json file
-            // var config = new ConfigurationBuilder()
-            //     .SetBasePath(Directory.GetCurrentDirectory())
-            //     .AddJsonFile("appsetting.json")
-            //     .Build();
-
-           // builder.Configuration.AddConfiguration(config);
-
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
-           // builder.Services.AddSingleton(new PongState());
-            // builder.Services.AddFluxor(opts =>
-            //     {
-            //         // opts.ScanAssemblies(typeof(PongState).Assembly);
-            //         // opts.ScanAssemblies(typeof(PongGameFeature).Assembly);
-            //         // opts.ScanAssemblies(typeof(MauiApp).Assembly);
-            //         opts.UseReduxDevTools();
-            //     }
-            // );
+            builder.Services.AddFluxor(o => o.ScanAssemblies(typeof(MauiProgram).Assembly).UseReduxDevTools());
 
             return builder.Build();
         }

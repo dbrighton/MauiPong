@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace MauiPong
+namespace Pong
 {
     public class Program
     {

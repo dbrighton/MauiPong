@@ -1,8 +1,8 @@
 ﻿<maui:MauiWinUIApplication
-    x:Class="MauiPong.WinUI.App"
+    x:Class="Pong.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maui="using:Microsoft.Maui"
-    xmlns:local="using:MauiPong.WinUI">
+    xmlns:local="using:Pong.WinUI">
 
 </maui:MauiWinUIApplication>
