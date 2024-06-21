@@ -122,6 +122,7 @@
                                 Dispatcher.Dispatch(new LastPlayerScoredOnAction(2)); // Player 2 was scored on
                             }
 
+                           _= StopGameAsync();
                         }
                     }
                 }
@@ -212,10 +213,7 @@
         StartGame();
     }
 
-    public void Dispose()
-    {
-        _timer?.Dispose();
-    }
+  
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -229,5 +227,10 @@
     {
         _timer?.Change(Timeout.Infinite, Timeout.Infinite); // Pause the timer
         await Task.Run(() => Dispatcher.Dispatch(new IsGamePausedAction(true)));
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
     }
 }
