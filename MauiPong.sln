@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pong", "MauiPong\Pong.csproj", "{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pong.API", "Pong.API\Pong.API.csproj", "{FB1CB2DC-6995-4FE3-8EE2-EFBC3D57768C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FB1CB2DC-6995-4FE3-8EE2-EFBC3D57768C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB1CB2DC-6995-4FE3-8EE2-EFBC3D57768C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB1CB2DC-6995-4FE3-8EE2-EFBC3D57768C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB1CB2DC-6995-4FE3-8EE2-EFBC3D57768C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
