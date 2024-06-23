@@ -1,15 +1,8 @@
-﻿@page "/"
-
-@using Common
-@using Fluxor
-@using global::Pong.Features.Game.Store
-@using Microsoft.AspNetCore.Components.Web
-@using Microsoft.JSInterop
-
+﻿
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 @implements IDisposable
 @inject IJSRuntime JSRuntime;
-@inject IState<PongStore.PongGameState> PongState
+@inject IState<PongGameState> PongState
 @inject IDispatcher Dispatcher
 
 
@@ -122,7 +115,7 @@
                                 Dispatcher.Dispatch(new LastPlayerScoredOnAction(2)); // Player 2 was scored on
                             }
 
-                           _= StopGameAsync();
+                            _ = StopGameAsync();
                         }
                     }
                 }
@@ -213,7 +206,7 @@
         StartGame();
     }
 
-  
+
 
     protected override void OnAfterRender(bool firstRender)
     {

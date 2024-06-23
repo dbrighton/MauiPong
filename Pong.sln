@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{8489A525-7A4C-4F05-8E47-620395EE2F70}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pong.Maui", "MauiPong\Pong.Maui.csproj", "{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pong.API", "Pong.API\Pong.API\Pong.API.csproj", "{D0455492-8211-4A93-BAFB-EE48E4AB2635}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pong.API.Client", "Pong.API\Pong.API.Client\Pong.API.Client.csproj", "{BBFCD212-F577-4779-97A2-319CBF036A18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PongRazorClassLibrary", "PongRazorClassLibrary\PongRazorClassLibrary.csproj", "{0054B9C2-B40B-440C-86F3-3FC11F48981E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{A6A3DC8E-601D-4266-B4C0-9287A4456756}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8489A525-7A4C-4F05-8E47-620395EE2F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8489A525-7A4C-4F05-8E47-620395EE2F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8489A525-7A4C-4F05-8E47-620395EE2F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8489A525-7A4C-4F05-8E47-620395EE2F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCFB62D5-9012-4CD8-A62A-A7B993BC02ED}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D0455492-8211-4A93-BAFB-EE48E4AB2635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0455492-8211-4A93-BAFB-EE48E4AB2635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0455492-8211-4A93-BAFB-EE48E4AB2635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0455492-8211-4A93-BAFB-EE48E4AB2635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBFCD212-F577-4779-97A2-319CBF036A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBFCD212-F577-4779-97A2-319CBF036A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBFCD212-F577-4779-97A2-319CBF036A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBFCD212-F577-4779-97A2-319CBF036A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0054B9C2-B40B-440C-86F3-3FC11F48981E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0054B9C2-B40B-440C-86F3-3FC11F48981E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0054B9C2-B40B-440C-86F3-3FC11F48981E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0054B9C2-B40B-440C-86F3-3FC11F48981E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8489A525-7A4C-4F05-8E47-620395EE2F70} = {A6A3DC8E-601D-4266-B4C0-9287A4456756}
+		{0054B9C2-B40B-440C-86F3-3FC11F48981E} = {A6A3DC8E-601D-4266-B4C0-9287A4456756}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {593855E8-C075-4807-9189-A7B75EEA9E35}
+	EndGlobalSection
+EndGlobal
