@@ -1,5 +1,9 @@
 ﻿
+using static Common.PongStore;
+
 namespace Common;
+
+public record PongStateReducerAction(PongState PongState);
 
 public record IsGamePausedAction(bool IsPaused);
 public record IsGameEndedAction(bool IsEnded);
